@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Kya Reply Karu? 🤔</title>
+<meta name="description" content="Paste the message you got, pick a vibe, and get the perfect reply in your own language — for any situation." />
+<meta name="theme-color" content="#ff5e8a" />
+
+<link rel="icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Kya Reply" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kya Reply Karu?" />
+<meta property="og:description" content="Paste the message you got and get the perfect reply in your own language — for any situation." />
+<meta property="og:image" content="icon-512.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Kya Reply Karu?" />
+<meta name="twitter:description" content="Never stuck on what to text back — pick a vibe, get the perfect reply." />
+<meta name="twitter:image" content="icon-512.png" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  :root{--bg1:#fff2f6;--bg2:#ffe9d8;--panel:#ffffff;--in:#fff5f0;--text:#3a2330;--muted:#a8808d;--accent:#ff5e8a;--p:#ff5e8a;--p2:#ff9a3d;--line:#ffe1e6;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text);min-height:100vh;
+    background:radial-gradient(800px 380px at 50% -8%,#ffd9e6 0,transparent 60%),linear-gradient(165deg,var(--bg1),var(--bg2));background-attachment:fixed;display:flex;justify-content:center;padding:20px 14px;}
+  .wrap{width:100%;max-width:460px;}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  h1{font-size:25px;font-weight:700;background:linear-gradient(90deg,var(--p2),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  h1 .e{-webkit-text-fill-color:initial;background:none;font-size:22px;}
+  .gear{background:var(--panel);border:1px solid var(--line);color:var(--muted);width:38px;height:38px;border-radius:11px;cursor:pointer;font-size:17px;box-shadow:0 4px 14px rgba(255,94,138,.14);}
+  .gear:hover{color:var(--p);}
+  .sub{color:var(--muted);font-size:14px;margin:-4px 0 16px;font-weight:500;}
+  .phone{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;min-height:120px;box-shadow:0 12px 34px rgba(255,120,150,.14);}
+  .label{font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+  .bubble-in{background:var(--in);border-radius:4px 16px 16px 16px;padding:12px 14px;font-size:15px;line-height:1.45;}
+  textarea{width:100%;background:var(--in);border:1.5px solid var(--line);border-radius:14px;padding:13px;color:var(--text);font-family:inherit;font-size:15px;
+    line-height:1.5;resize:vertical;min-height:80px;outline:none;}
+  textarea:focus{border-color:var(--p);}
+  .tones{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+  .tone{cursor:pointer;border:1.5px solid var(--line);background:var(--in);color:var(--muted);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;transition:.15s;}
+  .tone.on{background:linear-gradient(135deg,var(--p2),var(--p));border-color:transparent;color:#fff;}
+  .go{width:100%;cursor:pointer;border:none;font-family:inherit;font-weight:700;font-size:16px;color:#fff;padding:14px;border-radius:14px;
+    background:linear-gradient(90deg,var(--p2),var(--p));box-shadow:0 10px 26px rgba(255,94,138,.4);transition:transform .12s,filter .2s;}
+  .go:hover:not(:disabled){filter:brightness(1.06);}.go:active:not(:disabled){transform:translateY(2px);}
+  .go:disabled{opacity:.55;cursor:default;}
+  .replies{margin-top:22px;display:none;}.replies.show{display:block;}
+  .reply{background:linear-gradient(135deg,#ff8fb6,#ff6a82);color:#fff;border-radius:18px 18px 5px 18px;padding:13px 15px;margin:0 0 4px auto;max-width:90%;font-size:15px;line-height:1.45;display:flex;flex-direction:column;align-items:flex-start;gap:9px;box-shadow:0 8px 20px rgba(255,106,130,.28);}
+  .reply-tone{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:right;margin:6px 4px 16px 0;font-weight:600;}
+  .copy{align-self:flex-end;background:rgba(255,255,255,.28);border:none;color:#fff;border-radius:8px;font-size:11px;padding:4px 11px;cursor:pointer;font-family:inherit;font-weight:600;}
+  .copy:hover{background:rgba(255,255,255,.42);}
+  .err{background:#fff0f0;border:1px solid #ffc9cf;color:#c43a52;border-radius:12px;padding:13px;margin-top:14px;font-size:14px;display:none;line-height:1.5;}
+  .err.show{display:block;}
+  .mbg{position:fixed;inset:0;background:rgba(60,35,48,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;}
+  .mbg.show{display:flex;}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(255,120,150,.22);}
+  .modal h3{font-size:19px;margin-bottom:6px;}.modal p{color:var(--muted);font-size:13px;line-height:1.55;margin-bottom:14px;}
+  .modal label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:12px 0 6px;font-weight:600;}
+  .modal input,.modal select{width:100%;background:var(--in);border:1.5px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-family:inherit;font-size:15px;outline:none;}
+  .modal input:focus,.modal select:focus{border-color:var(--p);}
+  .msave{margin-top:18px;width:100%;background:linear-gradient(90deg,var(--p2),var(--p));color:#fff;border:none;font-weight:700;font-size:15px;padding:13px;border-radius:11px;cursor:pointer;font-family:inherit;}
+  .key-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5;}.key-note a{color:var(--p);font-weight:600;}
+  .spin{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:8px;}
+  @keyframes sp{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top"><h1>Kya Reply Karu? <span class="e">🤔</span></h1>
+      <button class="gear" id="gear" title="API key & model">⚙️</button></div>
+    <p class="sub">Stuck on what to text back? Paste the message, pick a vibe, get the perfect reply.</p>
+
+    <div class="phone">
+      <div class="label">They said…</div>
+      <textarea id="msg" placeholder="Paste the text you received here…"></textarea>
+      <div class="tones" id="tones"></div>
+    </div>
+    <div style="height:12px"></div>
+    <button class="go" id="go">✨ Write my replies</button>
+    <div class="err" id="err"></div>
+
+    <div class="replies" id="replies"></div>
+  </div>
+
+  <div class="mbg" id="mbg">
+    <div class="modal">
+      <h3>API settings 🔑</h3>
+      <p>Talks to Groq from your browser. Your key stays on <b>this device</b> only and goes nowhere but Groq.</p>
+      <label>Groq API key</label>
+      <input type="password" id="key" placeholder="gsk_…" autocomplete="off" />
+      <label>Model</label>
+      <select id="model">
+        <option value="openai/gpt-oss-120b">GPT-OSS 120B — best quality (recommended)</option>
+        <option value="llama-3.3-70b-versatile">Llama 3.3 70B — fast all-rounder</option>
+        <option value="openai/gpt-oss-20b">GPT-OSS 20B — faster</option>
+        <option value="llama-3.1-8b-instant">Llama 3.1 8B — fastest</option>
+      </select>
+      <button class="msave" id="msave">Save</button>
+      <p class="key-note">Get a free key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com</a> — no card needed.</p>
+    </div>
+  </div>
+
+  <script>
+    const $=id=>document.getElementById(id);
+    const getKey=()=>localStorage.getItem('groq_key')||'';
+    const getModel=()=>localStorage.getItem('groq_model')||'openai/gpt-oss-120b';
+
+    const TONES=['Smooth','Funny','Playing it cool','Flirty','Shut it down nicely'];
+    let active=new Set(['Smooth','Funny','Playing it cool']);
+    function renderTones(){
+      $('tones').innerHTML=TONES.map(t=>`<span class="tone ${active.has(t)?'on':''}" data-t="${t}">${t}</span>`).join('');
+      $('tones').querySelectorAll('.tone').forEach(el=>el.onclick=()=>{
+        const t=el.dataset.t;active.has(t)?active.delete(t):active.add(t);
+        if(active.size===0)active.add(t);renderTones();
+      });
+    }
+    renderTones();
+
+    function openSettings(){$('key').value=getKey();$('model').value=getModel();$('mbg').classList.add('show');}
+    $('gear').onclick=openSettings;
+    $('mbg').onclick=e=>{if(e.target===$('mbg'))$('mbg').classList.remove('show');};
+    $('msave').onclick=()=>{localStorage.setItem('groq_key',$('key').value.trim());localStorage.setItem('groq_model',$('model').value);$('mbg').classList.remove('show');};
+
+    async function callAI(system,user,maxTokens=1200,asJSON=true){
+      const key=getKey();if(!key)throw new Error('NO_KEY');
+      const req={model:getModel(),messages:[{role:'system',content:system},{role:'user',content:user}],max_tokens:maxTokens,temperature:1};
+      if(asJSON)req.response_format={type:'json_object'};
+      const body=JSON.stringify(req);
+      let lastErr;
+      for(let attempt=0;attempt<4;attempt++){
+        if(attempt)await new Promise(r=>setTimeout(r,700*attempt));
+        let res;
+        try{res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+key},body});}
+        catch(_){lastErr=new Error('NET');continue;}
+        if(res.status===401)throw new Error('BAD_KEY');
+        if(res.status===429){lastErr=new Error('QUOTA');continue;}
+        if(res.status>=500){lastErr=new Error('BUSY');continue;}
+        if(!res.ok)throw new Error('API '+res.status);
+        const data=await res.json();
+        const text=data.choices&&data.choices[0]&&data.choices[0].message?(data.choices[0].message.content||''):'';
+        if(!text){lastErr=new Error('EMPTY');continue;}
+        return text;
+      }
+      throw lastErr||new Error('BUSY');
+    }
+    function parseJSON(t){t=t.trim().replace(/^```(json)?/i,'').replace(/```$/,'').trim();const s=t.indexOf('{'),e=t.lastIndexOf('}');if(s>=0&&e>s)t=t.slice(s,e+1);return JSON.parse(t);}
+    function showErr(m){$('err').textContent=m;$('err').classList.add('show');}function clearErr(){$('err').classList.remove('show');}
+    function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+    const SYS=`You are an expert texting wingman with sharp social and emotional intelligence.
+
+You read the message the user received — its subtext, tone, and what the other person is really feeling or fishing for — and write replies that move the conversation forward.
+
+Each reply must:
+- Read the room: respond to the real intent/subtext, not just the literal words (e.g. playful jealousy, teasing, testing, flirting)
+- Be genuinely clever and charming — a sharp comeback, a playful tease, or a smooth line that actually lands and is specific to what they said
+- Match the other person's exact register and slang: if they wrote casual (tu / tum), reply casual — NEVER switch to formal (aap / apko)
+- Sound like a real, confident person texting — natural and a little playful; never stiff, generic, needy or over-eager
+- Match its requested tone exactly
+- Be the right length for a text (usually 1-2 short sentences); add a light hook or question when it helps keep the chat going
+- Be written in the SAME language and casual style as the received message (if Roman Urdu, natural Pakistani Roman Urdu - not Hindi)
+- Avoid clichés, pickup lines and anything cringe
+
+Respond ONLY with valid minified JSON in this exact format:
+{"replies":[{"tone":"the tone","text":"the reply"}]}
+No markdown, no extra text outside the JSON.`;
+
+    $('go').onclick=async()=>{
+      const msg=$('msg').value.trim();clearErr();
+      if(!msg){showErr('Paste the message you got first 🙂');return;}
+      if(!getKey()){showErr('Add your Groq API key first — tap ⚙️.');openSettings();return;}
+      const btn=$('go');btn.disabled=true;btn.innerHTML='<span class="spin"></span>Writing…';
+      $('replies').classList.remove('show');
+      try{
+        const tones=[...active];
+        const user=`The message I received:\n"${msg}"\n\nWrite one reply for each of these tones: ${tones.join(', ')}.\nRead the subtext and make each reply specific to THIS exact message — not generic. Keep it text-length and natural, and match the language and casual style of the received message. Return JSON: {"replies":[{"tone":"the tone","text":"the reply"}]}`;
+        const out=parseJSON(await callAI(SYS,user));
+        $('replies').innerHTML=(out.replies||[]).map(r=>`
+          <div class="reply"><span class="reply-txt">${esc(r.text||'')}</span><button class="copy">Copy</button></div>
+          <div class="reply-tone">${esc(r.tone||'')}</div>`).join('');
+        $('replies').querySelectorAll('.reply').forEach(rep=>{
+          rep.querySelector('.copy').onclick=()=>{navigator.clipboard.writeText(rep.querySelector('.reply-txt').textContent);rep.querySelector('.copy').textContent='Copied!';setTimeout(()=>rep.querySelector('.copy').textContent='Copy',1200);};
+        });
+        $('replies').classList.add('show');
+        $('replies').scrollIntoView({behavior:'smooth',block:'start'});
+      }catch(e){
+        if(e.message==='NO_KEY'){showErr('Add your API key first (⚙️).');openSettings();}
+        else if(e.message==='BAD_KEY')showErr('That Groq key was rejected — check it in ⚙️ (starts with gsk_).');
+        else if(e.message==='QUOTA')showErr('Going fast — Groq rate limit. Wait a few seconds and try again.');
+        else if(e.message==='BUSY')showErr('Groq is busy right now — I retried a few times. Wait a few seconds.');
+        else if(e.message==='NET')showErr('Network hiccup — check your connection and try again.');
+        else if(e.message==='EMPTY')showErr('Groq returned nothing — try again or rephrase.');
+        else if(e instanceof SyntaxError)showErr('Got a weird response — try again.');
+        else showErr('Something went wrong: '+e.message);
+      }finally{btn.disabled=false;btn.textContent='✨ Write my replies';}
+    };
+    if(!getKey())openSettings();
+
+    // installable PWA + auto-update (refreshes the app when a new version is deployed)
+    if('serviceWorker' in navigator){
+      let refreshing=false;
+      navigator.serviceWorker.addEventListener('controllerchange',()=>{
+        if(refreshing)return;refreshing=true;location.reload();
+      });
+      window.addEventListener('load',async()=>{
+        try{
+          const reg=await navigator.serviceWorker.register('sw.js');
+          reg.update().catch(()=>{});
+          setInterval(()=>reg.update().catch(()=>{}),60000);
+          document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{});});
+        }catch(_){}
+      });
+    }
+  </script>
+</body>
+</html>
