@@ -1,4 +1,4 @@
-const CACHE = 'kya-reply-karu-v1';
+const CACHE = 'kya-reply-karu-v2';
 const ASSETS = [
   './',
   './index.html',
